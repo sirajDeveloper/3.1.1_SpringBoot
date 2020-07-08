@@ -12,11 +12,12 @@ import com.example.model.User;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService, RoleDao {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDaoImpl userDao;
 
+    @Autowired
     private RoleDao roleDao;
 
     private UserRolesDao userRolesDao;

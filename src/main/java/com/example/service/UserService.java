@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.model.Role;
 import com.example.model.User;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface UserService {
     void updateUser(User user);
     User getUserByName(String name);
     void addUserRoles(Long userId, String userRoles);
+    Role findByRole(String role);
 }

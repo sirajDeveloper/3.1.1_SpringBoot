@@ -1,5 +1,6 @@
 package com.example.DAO;
 
+import com.example.model.Role;
 import com.example.model.User;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,13 +8,18 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class UserDaoImpl implements UserDao {
 
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
+
+    @Autowired
+    private RoleDao roleDao;
 
     @Override
     public List getAllUsers() {
@@ -29,6 +35,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
+        Set<Role> rolesSet = new HashSet<>();
+        if (user.getRole().equalsIgnoreCase("admin")) {
+            rolesSet.add(roleDao.findByRole("ROLE_ADMIN"));
+        } else {
+            rolesSet.add(roleDao.findByRole("ROLE_USER"));
+        }
+        user.setRoles(rolesSet);
         entityManager.persist(user);
     }
 

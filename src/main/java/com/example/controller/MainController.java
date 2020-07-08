@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.model.Role;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.model.User;
 import com.example.service.UserService;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -50,9 +54,13 @@ public class MainController {
 
     @PostMapping(value = "/adduser")
     public String addUser(@Validated User user, BindingResult result, ModelMap model) {
+        Set<Role> rolesSet = new HashSet<>();
+
         if (result.hasErrors()) {
             return "add-user";
         }
+
+        user.setRoles(rolesSet);
         userService.addUser(user);
         model.addAttribute("users", userService.getAllUsers());
         return "index";
