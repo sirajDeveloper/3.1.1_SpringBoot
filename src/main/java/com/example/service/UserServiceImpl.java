@@ -9,7 +9,10 @@ import com.example.DAO.UserRolesDao;
 import com.example.model.Role;
 import com.example.model.User;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,6 +40,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void addUser(User user) {
+        if (user.getRole().equalsIgnoreCase("admin")) {
+            user.setRoles(Collections.singleton(roleDao.findByRole(2L)));
+        } else {
+            user.setRoles(Collections.singleton(roleDao.findByRole(1L)));
+        }
         userDao.addUser(user);
     }
 

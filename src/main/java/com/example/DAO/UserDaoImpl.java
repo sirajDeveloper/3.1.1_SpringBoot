@@ -35,13 +35,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        Set<Role> rolesSet = new HashSet<>();
-        if (user.getRole().equalsIgnoreCase("admin")) {
-            rolesSet.add(roleDao.findByRole("ROLE_ADMIN"));
-        } else {
-            rolesSet.add(roleDao.findByRole("ROLE_USER"));
-        }
-        user.setRoles(rolesSet);
         entityManager.persist(user);
     }
 

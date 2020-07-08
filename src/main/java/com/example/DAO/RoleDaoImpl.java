@@ -18,4 +18,12 @@ public class RoleDaoImpl implements RoleDao {
         query.setParameter("role", role);
         return query.getSingleResult();
     }
+
+    @Override
+    public Role findByRole(Long id) {
+        TypedQuery<Role> query = entityManager.createQuery("from Role where id = :id", Role.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
+
 }
