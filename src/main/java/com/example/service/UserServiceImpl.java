@@ -40,11 +40,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void addUser(User user) {
-        if (user.getRole().equalsIgnoreCase("admin")) {
-            user.setRoles(Collections.singleton(roleDao.findByRole(2L)));
-        } else {
-            user.setRoles(Collections.singleton(roleDao.findByRole(1L)));
-        }
         userDao.addUser(user);
     }
 
@@ -76,5 +71,15 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public Role findByRole(String role) {
         return roleDao.findByRole(role);
+    }
+
+    @Override
+    public Role findByRole(Long id) {
+        return roleDao.findByRole(id);
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roleDao.getAllRoles();
     }
 }
