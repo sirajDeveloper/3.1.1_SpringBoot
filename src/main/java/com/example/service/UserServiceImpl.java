@@ -74,11 +74,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Role findByRole(Long id) {
         return roleDao.findByRole(id);
     }
 
     @Override
+    @Transactional
     public List<Role> getAllRoles() {
         return roleDao.getAllRoles();
     }

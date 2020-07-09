@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.config.handler.LoginSuccessHandler;
+import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 @EnableWebSecurity
